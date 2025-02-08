@@ -1,1 +1,5 @@
-export class Superhero {}
+export class Superhero {
+  name: string;
+  superpower: string;
+  humility: number;
+}

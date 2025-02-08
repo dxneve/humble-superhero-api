@@ -1,26 +1,20 @@
 import { Injectable } from '@nestjs/common';
-import { CreateSuperheroDto } from './dto/create-superhero.dto';
-import { UpdateSuperheroDto } from './dto/update-superhero.dto';
+
+import { superheroesInMemoryRepository } from './repository';
+
+import type { ISuperheroesService } from './interfaces';
+import type { CreateSuperheroDto } from './dto/create-superhero.dto';
+import type { Superhero } from './entities/superhero.entity';
 
 @Injectable()
-export class SuperheroesService {
-  create(createSuperheroDto: CreateSuperheroDto) {
-    return 'This action adds a new superhero';
+export class SuperheroesService implements ISuperheroesService {
+  private readonly repository = [...superheroesInMemoryRepository];
+
+  async create(createSuperheroDto: CreateSuperheroDto): Promise<void> {
+    this.repository.push({ ...createSuperheroDto });
   }
 
-  findAll() {
-    return `This action returns all superheroes`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} superhero`;
-  }
-
-  update(id: number, updateSuperheroDto: UpdateSuperheroDto) {
-    return `This action updates a #${id} superhero`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} superhero`;
+  async findAll(): Promise<Superhero[]> {
+    return this.repository;
   }
 }

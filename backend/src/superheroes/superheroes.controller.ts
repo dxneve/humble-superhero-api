@@ -1,46 +1,22 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete
-} from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 
 import { SuperheroesService } from './superheroes.service';
-import { CreateSuperheroDto } from './dto/create-superhero.dto';
-import { UpdateSuperheroDto } from './dto/update-superhero.dto';
+
+import type { ISuperheroesController } from './interfaces';
+import type { CreateSuperheroDto } from './dto/create-superhero.dto';
+import type { Superhero } from './entities/superhero.entity';
 
 @Controller('superheroes')
-export class SuperheroesController {
+export class SuperheroesController implements ISuperheroesController {
   constructor(private readonly superheroesService: SuperheroesService) {}
 
   @Post()
-  create(@Body() createSuperheroDto: CreateSuperheroDto) {
+  create(@Body() createSuperheroDto: CreateSuperheroDto): Promise<void> {
     return this.superheroesService.create(createSuperheroDto);
   }
 
   @Get()
-  findAll() {
+  findAll(): Promise<Superhero[]> {
     return this.superheroesService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.superheroesService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateSuperheroDto: UpdateSuperheroDto
-  ) {
-    return this.superheroesService.update(+id, updateSuperheroDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.superheroesService.remove(+id);
   }
 }

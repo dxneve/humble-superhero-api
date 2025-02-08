@@ -5,7 +5,7 @@ import {
   Body,
   Patch,
   Param,
-  Delete,
+  Delete
 } from '@nestjs/common';
 
 import { SuperheroesService } from './superheroes.service';
@@ -34,7 +34,7 @@ export class SuperheroesController {
   @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body() updateSuperheroDto: UpdateSuperheroDto,
+    @Body() updateSuperheroDto: UpdateSuperheroDto
   ) {
     return this.superheroesService.update(+id, updateSuperheroDto);
   }

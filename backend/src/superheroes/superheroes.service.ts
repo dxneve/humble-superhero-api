@@ -17,4 +17,8 @@ export class SuperheroesService implements ISuperheroesService {
   async findAll(): Promise<Superhero[]> {
     return this.repository;
   }
+
+  async findOne(name: string): Promise<Superhero> {
+    return this.repository.find((superhero) => superhero.name === name);
+  }
 }

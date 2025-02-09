@@ -10,8 +10,10 @@ import type { Superhero } from './entities/superhero.entity';
 export class SuperheroesService implements ISuperheroesService {
   private readonly repository = [...superheroesInMemoryRepository];
 
-  async create(createSuperheroDto: CreateSuperheroDto): Promise<void> {
+  async create(createSuperheroDto: CreateSuperheroDto): Promise<Superhero> {
     this.repository.push({ ...createSuperheroDto });
+
+    return createSuperheroDto;
   }
 
   async findAll(): Promise<Superhero[]> {

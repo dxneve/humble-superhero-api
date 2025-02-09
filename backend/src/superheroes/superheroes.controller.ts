@@ -11,13 +11,13 @@ export class SuperheroesController implements ISuperheroesController {
   constructor(private readonly superheroesService: SuperheroesService) {}
 
   @Post()
-  async create(@Body() createSuperheroDto: CreateSuperheroDto): Promise<void> {
-    const { name } = createSuperheroDto;
-
+  async create(
+    @Body() createSuperheroDto: CreateSuperheroDto
+  ): Promise<Superhero> {
     try {
-      const superheroExists = await this.superheroesService.findOne(name);
-
-      if (superheroExists) {
+      const { name } = createSuperheroDto;
+      const nameExists = await this.doesNameExist(name);
+      if (nameExists) {
         throw new ConflictException(
           `the name ${name} is already taken, please, enter a unique name`
         );
@@ -27,6 +27,10 @@ export class SuperheroesController implements ISuperheroesController {
     } catch (error) {
       throw error;
     }
+  }
+
+  private async doesNameExist(name: string): Promise<boolean> {
+    return Boolean(await this.superheroesService.findOne(name));
   }
 
   @Get()

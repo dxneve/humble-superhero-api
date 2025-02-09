@@ -3,7 +3,7 @@ import type { UpdateSuperheroDto } from '../dto/update-superhero.dto';
 import type { Superhero } from '../entities/superhero.entity';
 
 export interface ISuperheroesService {
-  create(createSuperheroDto: CreateSuperheroDto): Promise<void>;
+  create(createSuperheroDto: CreateSuperheroDto): Promise<Superhero>;
   findAll(): Promise<Superhero[]>;
 
   findOne?(name: string): Promise<Superhero | undefined>;
@@ -12,6 +12,6 @@ export interface ISuperheroesService {
 }
 
 export interface ISuperheroesController {
-  create(createSuperheroDto: CreateSuperheroDto): Promise<void>;
+  create(createSuperheroDto: CreateSuperheroDto): Promise<Superhero>;
   findAll(): Promise<Superhero[]>;
 }

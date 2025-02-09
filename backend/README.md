@@ -35,7 +35,7 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## curl requests examples for manual testing
+## curl requests examples
 
 - `curl -X POST -H "Content-Type: application/json" -d '{"name": "janee", "superpower": "janees superpower", "humility": 9}' http://127.0.0.1:3000/superheroes`
 

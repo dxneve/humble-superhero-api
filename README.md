@@ -8,8 +8,7 @@
   - Fastify
   - SWC (Speedy Web Compiler)
   - A simple in-memory database for storing data
-  - Class validator
-  - ConfigModule?
+  - Class validator, Class transformer
 
 ### Frontend:
 

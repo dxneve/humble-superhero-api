@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, ConflictException } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 
 import { SuperheroesService } from './superheroes.service';
 import { CreateSuperheroDto } from './dto/create-superhero.dto';
@@ -15,22 +15,10 @@ export class SuperheroesController implements ISuperheroesController {
     @Body() createSuperheroDto: CreateSuperheroDto
   ): Promise<Superhero> {
     try {
-      const { name } = createSuperheroDto;
-      const nameExists = await this.doesNameExist(name);
-      if (nameExists) {
-        throw new ConflictException(
-          `the name ${name} is already taken, please, enter a unique name`
-        );
-      }
-
       return this.superheroesService.create(createSuperheroDto);
     } catch (error) {
       throw error;
     }
-  }
-
-  private async doesNameExist(name: string): Promise<boolean> {
-    return Boolean(await this.superheroesService.findOne(name));
   }
 
   @Get()

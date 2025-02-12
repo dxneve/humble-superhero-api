@@ -37,6 +37,6 @@ $ npm run test:cov
 
 ## curl requests examples
 
-- `curl -X POST -H "Content-Type: application/json" -d '{"name": "janee", "superpower": "janees superpower", "humility": 9}' http://127.0.0.1:3000/superheroes`
+- `curl -X POST -H "Content-Type: application/json" -d '{"name": "janee", "superpower": "janees superpower", "humility": 9}' http://127.0.0.1:3000/api/superheroes`
 
-- `curl http://127.0.0.1:3000/superheroes`
+- `curl http://127.0.0.1:3000/api/superheroes`

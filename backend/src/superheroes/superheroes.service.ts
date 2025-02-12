@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { randomUUID } from 'crypto';
 
 import { superheroesInMemoryRepository } from './repository';
 
@@ -11,16 +12,14 @@ export class SuperheroesService implements ISuperheroesService {
   private readonly repository = [...superheroesInMemoryRepository];
 
   async create(createSuperheroDto: CreateSuperheroDto): Promise<Superhero> {
-    this.repository.push({ ...createSuperheroDto });
+    const newSuperhero = { id: randomUUID(), ...createSuperheroDto };
 
-    return createSuperheroDto;
+    this.repository.push(newSuperhero);
+
+    return newSuperhero;
   }
 
   async findAll(): Promise<Superhero[]> {
-    return this.repository;
-  }
-
-  async findOne(name: string): Promise<Superhero> {
-    return this.repository.find((superhero) => superhero.name === name);
+    return this.repository.sort((a, b) => b.humility - a.humility);
   }
 }
